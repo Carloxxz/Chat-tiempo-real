@@ -12,6 +12,12 @@
 
         const form = document.getElementById('form')
         const input = document.getElementById('input')
+        const messages = document.getElementById('messages')
+
+        socket.on('chat message', (msg) => {
+            const item = `<li>${msg}</li>`
+            messages.insertAdjacentHTML('beforeend', item)
+        })
 
         form.addEventListener('submit', (e) => {
             e.preventDefault()
@@ -42,6 +48,10 @@
             height: 100vh;
             padding: 36px;
             grid-template-rows: 1fr;
+        }
+
+        #messages {
+
         }
 
         #chat {
@@ -90,6 +100,7 @@
 </head>
 <body>
     <sectionon id="chat">
+        <ul id="messages"></ul>
         <form id="form" action="">
             <input id="input" type="text" name="message" placeholder="Type a message" autocomplete="off">
             <button type="submit">Enviar</button>
